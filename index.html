@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Age</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #030303;
+            color: #ffffff;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        h1, h2, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+        }
+        .glow-text {
+            text-shadow: 0 0 30px rgba(244, 114, 182, 0.3);
+        }
+
+        @keyframes mesh-drift-1 {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(10%, 15%) scale(1.1); }
+            66% { transform: translate(-5%, 5%) scale(0.9); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        @keyframes mesh-drift-2 {
+            0% { transform: translate(0, 0) scale(1.1); }
+            33% { transform: translate(-15%, -10%) scale(0.95); }
+            66% { transform: translate(10%, -20%) scale(1.05); }
+            100% { transform: translate(0, 0) scale(1.1); }
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+        .animate-mesh-1 { animation: mesh-drift-1 25s infinite ease-in-out; }
+        .animate-mesh-2 { animation: mesh-drift-2 35s infinite ease-in-out; }
+        .animate-twinkle { animation: twinkle var(--duration, 4s) infinite ease-in-out; animation-delay: var(--delay, 0s); }
+    </style>
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@^19.2.4",
+        "react-dom/client": "https://esm.sh/react-dom@^19.2.4/client"
+      }
+    }
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="module">
+        import React, { useState, useEffect, useRef, useMemo } from 'react';
+        import ReactDOM from 'react-dom/client';
+
+        const START_DATE = new Date('2024-06-08T00:15:00');
+
+        const BackgroundEffects = () => {
+          const stars = useMemo(() => {
+            return [...Array(40)].map((_, i) => ({
+              id: i,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              size: Math.random() * 2 + 1,
+              duration: `${4 + Math.random() * 6}s`,
+              delay: `${Math.random() * 5}s`
+            }));
+          }, []);
+
+          return React.createElement('div', { className: 'fixed inset-0 pointer-events-none overflow-hidden z-0 bg-[#020202]' },
+            React.createElement('div', { className: 'absolute inset-0 bg-gradient-to-b from-[#050505] via-[#020202] to-[#080308]' }),
+            React.createElement('div', { className: 'absolute inset-0 opacity-[0.07] mix-blend-soft-light', style: { backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` } }),
+            React.createElement('div', { className: 'absolute inset-0 overflow-hidden' },
+              React.createElement('div', { className: 'absolute -top-[20%] -left-[10%] w-[80%] h-[80%] bg-[radial-gradient(circle,rgba(139,92,246,0.12)_0%,transparent_70%)] blur-[120px] animate-mesh-1' }),
+              React.createElement('div', { className: 'absolute -bottom-[20%] -right-[10%] w-[80%] h-[80%] bg-[radial-gradient(circle,rgba(236,72,153,0.12)_0%,transparent_70%)] blur-[120px] animate-mesh-2' }),
+              React.createElement('div', { className: 'absolute top-1/4 left-1/4 w-[60%] h-[60%] bg-[radial-gradient(circle,rgba(79,70,229,0.05)_0%,transparent_70%)] blur-[100px] animate-pulse', style: { animationDuration: '15s' } })
+            ),
+            React.createElement('div', { className: 'absolute inset-0 opacity-40' },
+              stars.map((star) => React.createElement('div', {
+                key: star.id,
+                className: 'absolute rounded-full bg-white animate-twinkle',
+                style: {
+                  top: star.top,
+                  left: star.left,
+                  width: `${star.size}px`,
+                  height: `${star.size}px`,
+                  '--duration': star.duration,
+                  '--delay': star.delay,
+                  boxShadow: star.size > 2 ? '0 0 8px rgba(255,255,255,0.8)' : 'none'
+                }
+              }))
+            ),
+            React.createElement('div', { className: 'absolute -top-[5%] -left-[5%] w-[40%] h-[40%] bg-[radial-gradient(circle,rgba(255,255,255,0.03)_0%,transparent_80%)] blur-[80px]' }),
+            React.createElement('div', { className: 'absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,rgba(0,0,0,0.6)_100%)]' }),
+            React.createElement('div', { className: 'absolute inset-0 opacity-[0.03]', style: { backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '100px 100px' } })
+          );
+        };
+
+        const AnalogClock = ({ timeDiff }) => {
+          const hourHandRef = useRef(null);
+          const minuteHandRef = useRef(null);
+          const secondHandRef = useRef(null);
+
+          useEffect(() => {
+            let animationFrameId;
+            const updateClock = () => {
+              const now = new Date();
+              const ms = now.getMilliseconds();
+              const seconds = now.getSeconds();
+              const minutes = now.getMinutes();
+              const hours = now.getHours();
+              const secDeg = (seconds * 6) + (ms * 0.006);
+              const minDeg = (minutes * 6) + (seconds * 0.1);
+              const hourDeg = ((hours % 12) * 30) + (minutes * 0.5);
+              if (secondHandRef.current) secondHandRef.current.style.transform = `translateX(-50%) translateY(-100%) rotate(${secDeg}deg)`;
+              if (minuteHandRef.current) minuteHandRef.current.style.transform = `translateX(-50%) translateY(-100%) rotate(${minDeg}deg)`;
+              if (hourHandRef.current) hourHandRef.current.style.transform = `translateX(-50%) translateY(-100%) rotate(${hourDeg}deg)`;
+              animationFrameId = requestAnimationFrame(updateClock);
+            };
+            animationFrameId = requestAnimationFrame(updateClock);
+            return () => cancelAnimationFrame(animationFrameId);
+          }, []);
+
+          return React.createElement('div', { className: 'relative w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] md:w-[500px] md:h-[500px] mx-auto group' },
+            React.createElement('div', { className: 'absolute inset-0 rounded-full border-[6px] md:border-[10px] border-white/5 shadow-[0_0_100px_rgba(244,114,182,0.15)] transition-all duration-700' }),
+            React.createElement('div', { className: 'absolute inset-[8px] md:inset-[12px] rounded-full glass-card overflow-hidden shadow-inner flex items-center justify-center' },
+              React.createElement('div', { className: 'absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(244,114,182,0.15)_0%,transparent_70%)] opacity-50' }),
+              [...Array(60)].map((_, i) => React.createElement('div', { key: i, className: 'absolute w-full h-full', style: { transform: `rotate(${i * 6}deg)` } },
+                React.createElement('div', { className: `absolute top-3 md:top-5 left-1/2 -translate-x-1/2 ${i % 5 === 0 ? 'w-1 md:w-2 h-4 md:h-8 bg-pink-400/60' : 'w-[1px] h-2 md:h-4 bg-white/5'}` }))
+              ),
+              React.createElement('div', { className: 'relative z-0 flex flex-col items-center justify-center w-full px-6 text-center' },
+                React.createElement('div', { className: 'flex flex-col items-center mb-1 md:mb-2' },
+                  React.createElement('div', { className: 'flex items-baseline justify-center' },
+                    React.createElement('span', { className: 'text-7xl sm:text-9xl md:text-[11rem] font-serif font-black text-white leading-none tracking-tighter drop-shadow-2xl' }, timeDiff.years),
+                    React.createElement('span', { className: 'ml-2 text-sm sm:text-lg md:text-2xl text-pink-400 font-bold uppercase tracking-[0.3em] font-sans' }, 'Years')
+                  )
+                ),
+                React.createElement('div', { className: 'mb-3 md:mb-4 opacity-50' },
+                  React.createElement('p', { className: 'text-[10px] md:text-xs font-serif italic text-white/60 tracking-[0.4em] uppercase' }, 'Jisu ', React.createElement('span', { className: 'text-pink-500/80' }, '❤'), ' Jenu')
+                ),
+                React.createElement('div', { className: 'flex gap-4 sm:gap-8 md:gap-12 justify-center items-center w-full border-t border-white/10 pt-4 md:pt-6' },
+                  ['months', 'days', 'hours'].map((unit) => React.createElement('div', { key: unit, className: 'flex flex-col items-center' },
+                    React.createElement('span', { className: 'text-2xl sm:text-4xl md:text-5xl font-serif text-white leading-none' }, timeDiff[unit]),
+                    React.createElement('span', { className: 'text-[9px] md:text-xs text-white/40 uppercase tracking-widest mt-1 font-bold' }, unit)
+                  ))
+                ),
+                React.createElement('div', { className: 'mt-4 md:mt-8' },
+                  React.createElement('p', { className: 'text-[10px] md:text-xs text-pink-400/50 uppercase tracking-[0.5em] font-medium' }, 'Since 08 June 2024')
+                )
+              ),
+              React.createElement('div', { ref: hourHandRef, className: 'absolute top-1/2 left-1/2 w-1.5 md:w-2.5 h-[22%] bg-white/80 rounded-full origin-bottom -translate-x-1/2 -translate-y-full will-change-transform z-10' }),
+              React.createElement('div', { ref: minuteHandRef, className: 'absolute top-1/2 left-1/2 w-1 md:w-1.5 h-[32%] bg-white/40 rounded-full origin-bottom -translate-x-1/2 -translate-y-full will-change-transform z-10' }),
+              React.createElement('div', { ref: secondHandRef, className: 'absolute top-1/2 left-1/2 w-[1px] md:w-[2px] h-[40%] bg-pink-500 origin-bottom -translate-x-1/2 -translate-y-full will-change-transform shadow-[0_0_20px_rgba(236,72,153,1)] z-20' },
+                React.createElement('div', { className: 'absolute bottom-[-15px] left-1/2 -translate-x-1/2 w-2 md:w-3 h-4 md:h-6 bg-pink-500 rounded-full' })
+              ),
+              React.createElement('div', { className: 'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 md:w-6 h-4 md:h-6 bg-white rounded-full border-2 border-pink-500 shadow-[0_0_20px_rgba(255,255,255,0.4)] z-30' })
+            )
+          );
+        };
+
+        const App = () => {
+          const [timeDiff, setTimeDiff] = useState(null);
+
+          const calculateTime = () => {
+            const now = new Date();
+            const diffMs = now.getTime() - START_DATE.getTime();
+            const seconds = Math.floor((diffMs / 1000) % 60);
+            const minutes = Math.floor((diffMs / (1000 * 60)) % 60);
+            const hours = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
+            let years = now.getFullYear() - START_DATE.getFullYear();
+            let months = now.getMonth() - START_DATE.getMonth();
+            let days = now.getDate() - START_DATE.getDate();
+            if (days < 0) { months--; const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0); days += prevMonth.getDate(); }
+            if (months < 0) { years--; months += 12; }
+            setTimeDiff({ years, months, days, hours, minutes, seconds });
+          };
+
+          useEffect(() => {
+            calculateTime();
+            const timer = setInterval(calculateTime, 1000);
+            return () => clearInterval(timer);
+          }, []);
+
+          return React.createElement('div', { className: 'min-h-screen w-full relative bg-[#020202] selection:bg-pink-500/30 overflow-x-hidden flex flex-col items-center justify-center' },
+            React.createElement(BackgroundEffects),
+            React.createElement('main', { className: 'relative z-10 w-full flex flex-col items-center px-4 py-8 max-w-5xl mx-auto space-y-12' },
+              React.createElement('header', { className: 'text-center animate-in fade-in slide-in-from-top-12 duration-1000' },
+                React.createElement('div', { className: 'flex items-center justify-center gap-4 md:gap-6 mb-4 md:mb-6' },
+                  React.createElement('span', { className: 'text-xl md:text-2xl font-serif italic text-white/30 tracking-[0.3em] uppercase' }, 'Jisu'),
+                  React.createElement('div', { className: 'relative group' },
+                    React.createElement('span', { className: 'text-pink-500 text-2xl animate-pulse inline-block' }, '❤'),
+                    React.createElement('div', { className: 'absolute inset-0 bg-pink-500 blur-2xl opacity-20 group-hover:opacity-40 transition-opacity' })
+                  ),
+                  React.createElement('span', { className: 'text-xl md:text-2xl font-serif italic text-white/30 tracking-[0.3em] uppercase' }, 'Jenu')
+                ),
+                React.createElement('h1', { className: 'text-6xl md:text-8xl font-serif glow-text bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent leading-tight pb-4' }, 'Our Age')
+              ),
+              timeDiff && React.createElement('section', { className: 'w-full animate-in fade-in zoom-in-95 duration-1000 delay-300' },
+                React.createElement('div', { className: 'w-full max-w-6xl mx-auto flex flex-col items-center justify-center' },
+                  React.createElement(AnalogClock, { timeDiff: timeDiff }),
+                  React.createElement('div', { className: 'mt-8 md:mt-12 text-center max-w-sm px-4' },
+                    React.createElement('p', { className: 'text-white/40 font-light text-xs md:text-sm italic leading-relaxed tracking-wide' }, 
+                      "\"Every tick is a testament to the journey we've walked, side by side, heartbeat by heartbeat.\""
+                    )
+                  )
+                )
+              )
+            )
+          );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(React.createElement(App));
+    </script>
+</body>
+</html>
