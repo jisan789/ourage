@@ -1,54 +1,214 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Age</title>
+    <title>Our Age • Jisu & Jenu</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              gold: {
+                300: '#ffd27d',
+                400: '#e5b358',
+                500: '#c59533',
+                600: '#9d7420',
+              },
+              rosegold: {
+                300: '#fbcfe8',
+                400: '#f472b6',
+                500: '#ec4899',
+                600: '#db2777',
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Cinzel:wght@500;600;700;800;900&family=Playfair+Display:ital,wght@0,600..900;1,600..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sacramento&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-accent: #f472b6;
+            --primary-glow: rgba(244, 114, 182, 0.4);
+            --secondary-accent: #fbbf24;
+        }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #030303;
+            background-color: #030305;
             color: #ffffff;
             margin: 0;
             overflow-x: hidden;
-        }
-        h1, h2, .font-serif {
-            font-family: 'Playfair Display', serif;
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
-        }
-        .glow-text {
-            text-shadow: 0 0 30px rgba(244, 114, 182, 0.3);
+            user-select: none;
+            -webkit-font-smoothing: antialiased;
         }
 
-        @keyframes mesh-drift-1 {
-            0% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(10%, 15%) scale(1.1); }
-            66% { transform: translate(-5%, 5%) scale(0.9); }
-            100% { transform: translate(0, 0) scale(1); }
+        .font-signature {
+            font-family: Sacramento, Caveat, cursive;
         }
-        @keyframes mesh-drift-2 {
-            0% { transform: translate(0, 0) scale(1.1); }
-            33% { transform: translate(-15%, -10%) scale(0.95); }
-            66% { transform: translate(10%, -20%) scale(1.05); }
-            100% { transform: translate(0, 0) scale(1.1); }
+
+        .font-clock-roman {
+            font-family: 'Cinzel', serif;
         }
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.2); }
+
+        .font-clock-num {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-variant-numeric: tabular-nums;
         }
-        .animate-mesh-1 { animation: mesh-drift-1 25s infinite ease-in-out; }
-        .animate-mesh-2 { animation: mesh-drift-2 35s infinite ease-in-out; }
-        .animate-twinkle { animation: twinkle var(--duration, 4s) infinite ease-in-out; animation-delay: var(--delay, 0s); }
+
+        .font-clock-sub {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Glassmorphism Luxury Cards */
+        .glass-panel {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-panel-glow {
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px var(--primary-glow);
+        }
+
+        /* Watch 3D Bezel & Dial Finishes */
+        .watch-case {
+            background: radial-gradient(circle at 35% 30%, #32323a 0%, #15151a 55%, #0a0a0d 100%);
+            box-shadow: 
+                0 30px 90px rgba(0, 0, 0, 0.95),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 2px 4px rgba(255, 255, 255, 0.25),
+                inset 0 -4px 10px rgba(0, 0, 0, 0.9);
+        }
+
+        .bezel-gold-ring {
+            background: conic-gradient(
+                from 180deg at 50% 50%,
+                #fcd34d 0deg,
+                #b45309 60deg,
+                #fef08a 120deg,
+                #92400e 180deg,
+                #fde68a 240deg,
+                #78350f 300deg,
+                #fcd34d 360deg
+            );
+        }
+
+        .bezel-rosegold-ring {
+            background: conic-gradient(
+                from 180deg at 50% 50%,
+                #f472b6 0deg,
+                #9d174d 60deg,
+                #fbcfe8 120deg,
+                #831843 180deg,
+                #f472b6 240deg,
+                #500724 300deg,
+                #f472b6 360deg
+            );
+        }
+
+        .bezel-silver-ring {
+            background: conic-gradient(
+                from 180deg at 50% 50%,
+                #e2e8f0 0deg,
+                #475569 60deg,
+                #f8fafc 120deg,
+                #334155 180deg,
+                #cbd5e1 240deg,
+                #1e293b 300deg,
+                #e2e8f0 360deg
+            );
+        }
+
+        .bezel-emerald-ring {
+            background: conic-gradient(
+                from 180deg at 50% 50%,
+                #34d399 0deg,
+                #064e3b 60deg,
+                #a7f3d0 120deg,
+                #047857 180deg,
+                #6ee7b7 240deg,
+                #022c22 300deg,
+                #34d399 360deg
+            );
+        }
+
+        /* Sunburst dial pattern */
+        .sunburst-dial {
+            background: 
+                radial-gradient(circle at center, rgba(30, 20, 35, 0.9) 0%, rgba(10, 8, 14, 0.98) 70%, #050407 100%),
+                repeating-conic-gradient(from 0deg, rgba(255, 255, 255, 0.02) 0deg 3deg, transparent 3deg 6deg);
+        }
+
+
+
+        /* Animations */
+        @keyframes subtle-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.08); opacity: 1; filter: drop-shadow(0 0 12px var(--primary-accent)); }
+        }
+
+        @keyframes heart-beat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.22); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.15); }
+            70% { transform: scale(1); }
+        }
+
+        @keyframes float-dust {
+            0% { transform: translateY(0px) translateX(0px); opacity: 0.3; }
+            50% { transform: translateY(-40px) translateX(20px); opacity: 0.8; }
+            100% { transform: translateY(0px) translateX(0px); opacity: 0.3; }
+        }
+
+        @keyframes crown-shimmer {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+            100% { opacity: 0.3; }
+        }
+
+        .animate-heartbeat {
+            animation: heart-beat 1.25s infinite ease-in-out;
+        }
+
+        .animate-subtle-pulse {
+            animation: subtle-pulse 3s infinite ease-in-out;
+        }
+
+        /* 3D Perspective container */
+        .watch-perspective {
+            perspective: 1200px;
+            transform-style: preserve-3d;
+        }
+
+        .watch-inner-3d {
+            transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        /* Scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030305;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
     </style>
     <script type="importmap">
     {
@@ -59,153 +219,619 @@
     }
     </script>
 </head>
-<body>
+<body class="bg-[#030305] text-white selection:bg-pink-500/30">
     <div id="root"></div>
 
     <script type="module">
-        import React, { useState, useEffect, useRef, useMemo } from 'react';
+        import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
         import ReactDOM from 'react-dom/client';
 
+        // START OF RELATIONSHIP: June 8, 2024 at 00:15:00
         const START_DATE = new Date('2024-06-08T00:15:00');
 
-        const BackgroundEffects = () => {
+        // LUXURY THEMES DEFINITION
+        const THEMES = {
+          rosegold: {
+            id: 'rosegold',
+            name: 'Rose Gold & Obsidian',
+            accent: '#f472b6',
+            accentLight: '#fbcfe8',
+            accentGlow: 'rgba(244, 114, 182, 0.35)',
+            ringClass: 'bezel-rosegold-ring',
+            dialCenter: 'from-pink-950/40 via-[#0d0710] to-[#040206]',
+            badgeColor: 'border-pink-500/30 text-pink-300 bg-pink-500/10',
+            glowText: 'shadow-[0_0_25px_rgba(244,114,182,0.4)]'
+          },
+          gold: {
+            id: 'gold',
+            name: 'Champagne Gold & Onyx',
+            accent: '#f59e0b',
+            accentLight: '#fef3c7',
+            accentGlow: 'rgba(245, 158, 11, 0.35)',
+            ringClass: 'bezel-gold-ring',
+            dialCenter: 'from-amber-950/40 via-[#0f0c05] to-[#050402]',
+            badgeColor: 'border-amber-500/30 text-amber-300 bg-amber-500/10',
+            glowText: 'shadow-[0_0_25px_rgba(245,158,11,0.4)]'
+          },
+          emerald: {
+            id: 'emerald',
+            name: 'Emerald & Royal Gold',
+            accent: '#10b981',
+            accentLight: '#a7f3d0',
+            accentGlow: 'rgba(16, 185, 129, 0.35)',
+            ringClass: 'bezel-emerald-ring',
+            dialCenter: 'from-emerald-950/40 via-[#040e09] to-[#010604]',
+            badgeColor: 'border-emerald-500/30 text-emerald-300 bg-emerald-500/10',
+            glowText: 'shadow-[0_0_25px_rgba(16,185,129,0.4)]'
+          },
+          silver: {
+            id: 'silver',
+            name: 'Celestial Silver & Platinum',
+            accent: '#38bdf8',
+            accentLight: '#bae6fd',
+            accentGlow: 'rgba(56, 189, 248, 0.35)',
+            ringClass: 'bezel-silver-ring',
+            dialCenter: 'from-sky-950/40 via-[#060b13] to-[#020408]',
+            badgeColor: 'border-sky-500/30 text-sky-300 bg-sky-500/10',
+            glowText: 'shadow-[0_0_25px_rgba(56,189,248,0.4)]'
+          }
+        };
+
+        // SOUND SYNTHESIS ENGINE (Pure Web Audio - No external assets)
+        class MechanicalWatchSound {
+          constructor() {
+            this.audioCtx = null;
+            this.muted = false;
+          }
+
+          init() {
+            if (!this.audioCtx) {
+              const AudioContext = window.AudioContext || window.webkitAudioContext;
+              if (AudioContext) {
+                this.audioCtx = new AudioContext();
+              }
+            }
+            if (this.audioCtx && this.audioCtx.state === 'suspended') {
+              this.audioCtx.resume();
+            }
+          }
+
+          playTick(isEven = false) {
+            if (this.muted) return;
+            if (!this.audioCtx) this.init();
+            if (!this.audioCtx) return;
+            try {
+              const now = this.audioCtx.currentTime;
+              
+              // High precision escapement tick click
+              const osc = this.audioCtx.createOscillator();
+              const gain = this.audioCtx.createGain();
+              const filter = this.audioCtx.createBiquadFilter();
+
+              filter.type = 'bandpass';
+              filter.frequency.setValueAtTime(isEven ? 3600 : 4200, now);
+              filter.Q.setValueAtTime(14, now);
+
+              osc.type = 'triangle';
+              osc.frequency.setValueAtTime(isEven ? 2800 : 3400, now);
+              osc.frequency.exponentialRampToValueAtTime(120, now + 0.025);
+
+              gain.gain.setValueAtTime(0.045, now);
+              gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.025);
+
+              osc.connect(filter);
+              filter.connect(gain);
+              gain.connect(this.audioCtx.destination);
+
+              osc.start(now);
+              osc.stop(now + 0.026);
+            } catch (e) {
+              // Ignore audio context interruptions
+            }
+          }
+        }
+
+        const soundEngine = new MechanicalWatchSound();
+
+        // CELESTIAL BACKGROUND WITH REAL DEPTH
+        const BackgroundEffects = ({ currentTheme }) => {
           const stars = useMemo(() => {
-            return [...Array(40)].map((_, i) => ({
+            return [...Array(65)].map((_, i) => ({
               id: i,
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
-              size: Math.random() * 2 + 1,
+              size: Math.random() * 2.2 + 0.8,
               duration: `${4 + Math.random() * 6}s`,
-              delay: `${Math.random() * 5}s`
+              delay: `${Math.random() * 5}s`,
+              opacity: Math.random() * 0.7 + 0.3
             }));
           }, []);
 
-          return React.createElement('div', { className: 'fixed inset-0 pointer-events-none overflow-hidden z-0 bg-[#020202]' },
-            React.createElement('div', { className: 'absolute inset-0 bg-gradient-to-b from-[#050505] via-[#020202] to-[#080308]' }),
-            React.createElement('div', { className: 'absolute inset-0 opacity-[0.07] mix-blend-soft-light', style: { backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` } }),
+          return React.createElement('div', { className: 'fixed inset-0 pointer-events-none overflow-hidden z-0 bg-[#020204]' },
+            // Deep cosmic gradient
+            React.createElement('div', { 
+              className: 'absolute inset-0 bg-gradient-to-b from-[#050408] via-[#020205] to-[#040106] transition-colors duration-1000' 
+            }),
+            // Subtle noise overlay for analog film aesthetic
+            React.createElement('div', { 
+              className: 'absolute inset-0 opacity-[0.05] mix-blend-soft-light pointer-events-none', 
+              style: { backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` } 
+            }),
+            // Luminous nebulas responding to theme
             React.createElement('div', { className: 'absolute inset-0 overflow-hidden' },
-              React.createElement('div', { className: 'absolute -top-[20%] -left-[10%] w-[80%] h-[80%] bg-[radial-gradient(circle,rgba(139,92,246,0.12)_0%,transparent_70%)] blur-[120px] animate-mesh-1' }),
-              React.createElement('div', { className: 'absolute -bottom-[20%] -right-[10%] w-[80%] h-[80%] bg-[radial-gradient(circle,rgba(236,72,153,0.12)_0%,transparent_70%)] blur-[120px] animate-mesh-2' }),
-              React.createElement('div', { className: 'absolute top-1/4 left-1/4 w-[60%] h-[60%] bg-[radial-gradient(circle,rgba(79,70,229,0.05)_0%,transparent_70%)] blur-[100px] animate-pulse', style: { animationDuration: '15s' } })
+              React.createElement('div', { 
+                className: 'absolute -top-[15%] -left-[10%] w-[75%] h-[75%] rounded-full blur-[140px] animate-mesh-1 transition-all duration-1000',
+                style: { background: `radial-gradient(circle, ${currentTheme.accent}20 0%, transparent 70%)` }
+              }),
+              React.createElement('div', { 
+                className: 'absolute -bottom-[20%] -right-[10%] w-[80%] h-[80%] rounded-full blur-[150px] animate-mesh-2 transition-all duration-1000',
+                style: { background: `radial-gradient(circle, ${currentTheme.accent}18 0%, transparent 70%)` }
+              }),
+              React.createElement('div', { 
+                className: 'absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[130px] opacity-25 pointer-events-none',
+                style: { background: `radial-gradient(circle, ${currentTheme.accent}12 0%, transparent 65%)` }
+              })
             ),
-            React.createElement('div', { className: 'absolute inset-0 opacity-40' },
+            // Twinkling stars
+            React.createElement('div', { className: 'absolute inset-0' },
               stars.map((star) => React.createElement('div', {
                 key: star.id,
-                className: 'absolute rounded-full bg-white animate-twinkle',
+                className: 'absolute rounded-full bg-white',
                 style: {
                   top: star.top,
                   left: star.left,
                   width: `${star.size}px`,
                   height: `${star.size}px`,
-                  '--duration': star.duration,
-                  '--delay': star.delay,
-                  boxShadow: star.size > 2 ? '0 0 8px rgba(255,255,255,0.8)' : 'none'
+                  opacity: star.opacity,
+                  boxShadow: star.size > 1.8 ? `0 0 8px rgba(255,255,255,0.9), 0 0 14px ${currentTheme.accent}` : 'none',
+                  animation: `twinkle ${star.duration} infinite ease-in-out ${star.delay}`
                 }
               }))
             ),
-            React.createElement('div', { className: 'absolute -top-[5%] -left-[5%] w-[40%] h-[40%] bg-[radial-gradient(circle,rgba(255,255,255,0.03)_0%,transparent_80%)] blur-[80px]' }),
-            React.createElement('div', { className: 'absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,rgba(0,0,0,0.6)_100%)]' }),
-            React.createElement('div', { className: 'absolute inset-0 opacity-[0.03]', style: { backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '100px 100px' } })
+            // Horizon vignette
+            React.createElement('div', { className: 'absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.85)_100%)]' })
           );
         };
 
-        const AnalogClock = ({ timeDiff }) => {
+        // LUXURY HAUTE HORLOGERIE ANALOG TIMEPIECE
+        const LuxuryWatch = ({ timeDiff, currentTheme }) => {
           const hourHandRef = useRef(null);
           const minuteHandRef = useRef(null);
           const secondHandRef = useRef(null);
+          const lastSecondRef = useRef(-1);
 
+          // Smooth 60fps/120fps Hand Movement & Mechanical Audio
           useEffect(() => {
             let animationFrameId;
-            const updateClock = () => {
+
+            const updateHands = () => {
               const now = new Date();
               const ms = now.getMilliseconds();
-              const seconds = now.getSeconds();
-              const minutes = now.getMinutes();
-              const hours = now.getHours();
-              const secDeg = (seconds * 6) + (ms * 0.006);
-              const minDeg = (minutes * 6) + (seconds * 0.1);
-              const hourDeg = ((hours % 12) * 30) + (minutes * 0.5);
-              if (secondHandRef.current) secondHandRef.current.style.transform = `translateX(-50%) translateY(-100%) rotate(${secDeg}deg)`;
-              if (minuteHandRef.current) minuteHandRef.current.style.transform = `translateX(-50%) translateY(-100%) rotate(${minDeg}deg)`;
-              if (hourHandRef.current) hourHandRef.current.style.transform = `translateX(-50%) translateY(-100%) rotate(${hourDeg}deg)`;
-              animationFrameId = requestAnimationFrame(updateClock);
+              const sec = now.getSeconds();
+              const min = now.getMinutes();
+              const hour = now.getHours();
+
+              // Trigger mechanical escapement tick
+              if (sec !== lastSecondRef.current) {
+                lastSecondRef.current = sec;
+                soundEngine.playTick(sec % 2 === 0);
+              }
+
+              // Ultra-smooth sweeping seconds (continuous analog movement)
+              const secDeg = (sec * 6) + (ms * 0.006);
+              const minDeg = (min * 6) + (sec * 0.1) + (ms * 0.0001);
+              const hourDeg = ((hour % 12) * 30) + (min * 0.5);
+
+              if (secondHandRef.current) {
+                secondHandRef.current.style.transform = `translateX(-50%) translateY(-100%) rotate(${secDeg}deg)`;
+              }
+              if (minuteHandRef.current) {
+                minuteHandRef.current.style.transform = `translateX(-50%) translateY(-100%) rotate(${minDeg}deg)`;
+              }
+              if (hourHandRef.current) {
+                hourHandRef.current.style.transform = `translateX(-50%) translateY(-100%) rotate(${hourDeg}deg)`;
+              }
+
+              animationFrameId = requestAnimationFrame(updateHands);
             };
-            animationFrameId = requestAnimationFrame(updateClock);
+
+            animationFrameId = requestAnimationFrame(updateHands);
             return () => cancelAnimationFrame(animationFrameId);
           }, []);
 
-          return React.createElement('div', { className: 'relative w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] md:w-[500px] md:h-[500px] mx-auto group' },
-            React.createElement('div', { className: 'absolute inset-0 rounded-full border-[6px] md:border-[10px] border-white/5 shadow-[0_0_100px_rgba(244,114,182,0.15)] transition-all duration-700' }),
-            React.createElement('div', { className: 'absolute inset-[8px] md:inset-[12px] rounded-full glass-card overflow-hidden shadow-inner flex items-center justify-center' },
-              React.createElement('div', { className: 'absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(244,114,182,0.15)_0%,transparent_70%)] opacity-50' }),
-              [...Array(60)].map((_, i) => React.createElement('div', { key: i, className: 'absolute w-full h-full', style: { transform: `rotate(${i * 6}deg)` } },
-                React.createElement('div', { className: `absolute top-3 md:top-5 left-1/2 -translate-x-1/2 ${i % 5 === 0 ? 'w-1 md:w-2 h-4 md:h-8 bg-pink-400/60' : 'w-[1px] h-2 md:h-4 bg-white/5'}` }))
-              ),
-              React.createElement('div', { className: 'relative z-0 flex flex-col items-center justify-center w-full px-6 text-center' },
-                React.createElement('div', { className: 'flex flex-col items-center mb-1 md:mb-2' },
-                  React.createElement('div', { className: 'flex items-baseline justify-center' },
-                    React.createElement('span', { className: 'text-7xl sm:text-9xl md:text-[11rem] font-serif font-black text-white leading-none tracking-tighter drop-shadow-2xl' }, timeDiff.years),
-                    React.createElement('span', { className: 'ml-2 text-sm sm:text-lg md:text-2xl text-pink-400 font-bold uppercase tracking-[0.3em] font-sans' }, 'Years')
+          // Hours markers indices (1 to 12)
+          const hourIndices = useMemo(() => [
+            { num: 'XII', deg: 0, isMajor: true },
+            { num: 'I', deg: 30, isMajor: false },
+            { num: 'II', deg: 60, isMajor: false },
+            { num: 'III', deg: 90, isMajor: true },
+            { num: 'IV', deg: 120, isMajor: false },
+            { num: 'V', deg: 150, isMajor: false },
+            { num: 'VI', deg: 180, isMajor: true },
+            { num: 'VII', deg: 210, isMajor: false },
+            { num: 'VIII', deg: 240, isMajor: false },
+            { num: 'IX', deg: 270, isMajor: true },
+            { num: 'X', deg: 300, isMajor: false },
+            { num: 'XI', deg: 330, isMajor: false }
+          ], []);
+
+          // 60-second micro tick marks
+          const dialTicks = useMemo(() => {
+            return [...Array(60)].map((_, i) => ({
+              deg: i * 6,
+              isFive: i % 5 === 0,
+              fiveIndex: i / 5
+            }));
+          }, []);
+
+          return React.createElement('div', {
+            className: 'watch-perspective relative mx-auto my-4 cursor-default select-none'
+          },
+            // Ambient Watch Drop Glow
+            React.createElement('div', {
+              className: 'absolute inset-[-20px] sm:inset-[-30px] rounded-full blur-[60px] opacity-40 transition-all duration-700 pointer-events-none',
+              style: { backgroundColor: currentTheme.accent }
+            }),
+
+            // THE WATCH CASE
+            React.createElement('div', {
+              className: 'watch-inner-3d relative w-[340px] h-[340px] xs:w-[380px] xs:h-[380px] sm:w-[480px] sm:h-[480px] md:w-[540px] md:h-[540px] rounded-full watch-case p-[12px] sm:p-[16px] md:p-[20px]'
+            },
+              // Outer Bezel Chamfer & Knurled Rim
+              React.createElement('div', {
+                className: `absolute inset-[6px] sm:inset-[8px] rounded-full ${currentTheme.ringClass} p-[2px] shadow-2xl transition-all duration-700`
+              },
+                // Bezel Screws / Luxury Studs at 1, 2, 4, 5, 7, 8, 10, 11
+                [30, 60, 120, 150, 210, 240, 300, 330].map(angle => 
+                  React.createElement('div', {
+                    key: angle,
+                    className: 'absolute w-full h-full pointer-events-none',
+                    style: { transform: `rotate(${angle}deg)` }
+                  },
+                    React.createElement('div', {
+                      className: 'absolute top-[3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] sm:w-[7px] sm:h-[7px] rounded-full bg-gradient-to-b from-white/90 via-gray-300 to-gray-700 shadow-[0_1px_3px_rgba(0,0,0,0.8)] border border-black/40 flex items-center justify-center'
+                    },
+                      // Hex / Slot in screw head
+                      React.createElement('div', { className: 'w-full h-[1px] bg-black/60 transform rotate-45' })
+                    )
                   )
                 ),
-                React.createElement('div', { className: 'mb-3 md:mb-4 opacity-50' },
-                  React.createElement('p', { className: 'text-[10px] md:text-xs font-serif italic text-white/60 tracking-[0.4em] uppercase' }, 'Jisu ', React.createElement('span', { className: 'text-pink-500/80' }, '❤'), ' Jenu')
-                ),
-                React.createElement('div', { className: 'flex gap-4 sm:gap-8 md:gap-12 justify-center items-center w-full border-t border-white/10 pt-4 md:pt-6' },
-                  ['months', 'days', 'hours'].map((unit) => React.createElement('div', { key: unit, className: 'flex flex-col items-center' },
-                    React.createElement('span', { className: 'text-2xl sm:text-4xl md:text-5xl font-serif text-white leading-none' }, timeDiff[unit]),
-                    React.createElement('span', { className: 'text-[9px] md:text-xs text-white/40 uppercase tracking-widest mt-1 font-bold' }, unit)
-                  ))
-                ),
-              ),
-              React.createElement('div', { ref: hourHandRef, className: 'absolute top-1/2 left-1/2 w-1.5 md:w-2.5 h-[22%] bg-white/80 rounded-full origin-bottom -translate-x-1/2 -translate-y-full will-change-transform z-10' }),
-              React.createElement('div', { ref: minuteHandRef, className: 'absolute top-1/2 left-1/2 w-1 md:w-1.5 h-[32%] bg-white/40 rounded-full origin-bottom -translate-x-1/2 -translate-y-full will-change-transform z-10' }),
-              React.createElement('div', { ref: secondHandRef, className: 'absolute top-1/2 left-1/2 w-[1px] md:w-[2px] h-[40%] bg-pink-500 origin-bottom -translate-x-1/2 -translate-y-full will-change-transform shadow-[0_0_20px_rgba(236,72,153,1)] z-20' },
-                React.createElement('div', { className: 'absolute bottom-[-15px] left-1/2 -translate-x-1/2 w-2 md:w-3 h-4 md:h-6 bg-pink-500 rounded-full' })
-              ),
-              React.createElement('div', { className: 'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 md:w-6 h-4 md:h-6 bg-white rounded-full border-2 border-pink-500 shadow-[0_0_20px_rgba(255,255,255,0.4)] z-30' })
+
+                // Inner Bezel / Rehaut with Tachymeter / Minute markings
+                React.createElement('div', {
+                  className: 'relative w-full h-full rounded-full bg-[#0a0a0f] p-[8px] sm:p-[14px] md:p-[16px] shadow-inner overflow-hidden border border-white/10'
+                },
+                  // Dial Face
+                  React.createElement('div', {
+                    className: `relative w-full h-full rounded-full sunburst-dial overflow-hidden flex items-center justify-center shadow-[inset_0_4px_30px_rgba(0,0,0,0.95)]`
+                  },
+                    // Concentric guilloché rings
+                    React.createElement('div', {
+                      className: 'absolute inset-0 rounded-full border border-white/[0.04] m-[30px] sm:m-[45px] pointer-events-none'
+                    }),
+                    React.createElement('div', {
+                      className: 'absolute inset-0 rounded-full border border-white/[0.03] m-[65px] sm:m-[95px] pointer-events-none'
+                    }),
+                    React.createElement('div', {
+                      className: 'absolute inset-0 rounded-full border border-white/[0.03] m-[105px] sm:m-[145px] pointer-events-none'
+                    }),
+
+                    // Center Dynamic Radial Glow
+                    React.createElement('div', {
+                      className: 'absolute inset-0 opacity-40 transition-all duration-700 pointer-events-none',
+                      style: {
+                        background: `radial-gradient(circle at center, ${currentTheme.accent}30 0%, transparent 65%)`
+                      }
+                    }),
+
+                    // Dial Chapter Ring: 60 Micro-Ticks & Five-Minute Numerals
+                    dialTicks.map(({ deg, isFive, fiveIndex }) => 
+                      React.createElement('div', {
+                        key: deg,
+                        className: 'absolute w-full h-full pointer-events-none',
+                        style: { transform: `rotate(${deg}deg)` }
+                      },
+                        React.createElement('div', {
+                          className: `absolute top-2 sm:top-3 left-1/2 -translate-x-1/2 ${
+                            isFive 
+                              ? 'w-[2px] sm:w-[3px] h-[8px] sm:h-[13px] bg-gradient-to-b from-white to-white/40 shadow-[0_0_6px_rgba(255,255,255,0.7)]' 
+                              : 'w-[1px] h-[4px] sm:h-[7px] bg-white/20'
+                          }`
+                        })
+                      )
+                    ),
+
+                    // Applied 3D Faceted Roman / Baton Indices
+                    hourIndices.map(({ num, deg, isMajor }) => 
+                      React.createElement('div', {
+                        key: num,
+                        className: 'absolute w-full h-full pointer-events-none',
+                        style: { transform: `rotate(${deg}deg)` }
+                      },
+                        // Faceted Marker
+                        React.createElement('div', {
+                          className: 'absolute top-5 sm:top-8 left-1/2 -translate-x-1/2 flex flex-col items-center'
+                        },
+                          // Luminescent tritium pip
+                          React.createElement('div', {
+                            className: 'w-[3px] h-[3px] sm:w-[4px] sm:h-[4px] rounded-full mb-1 shadow-sm',
+                            style: { backgroundColor: currentTheme.accent, boxShadow: `0 0 6px ${currentTheme.accent}` }
+                          }),
+                          // Roman numeral
+                          React.createElement('span', {
+                            className: `font-clock-roman font-bold tracking-widest text-[9px] sm:text-xs md:text-sm ${
+                              isMajor ? 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]' : 'text-white/60'
+                            }`,
+                            style: {
+                              transform: `rotate(${-deg}deg)`,
+                              textShadow: '0 1px 2px rgba(0,0,0,0.9)'
+                            }
+                          }, num)
+                        )
+                      )
+                    ),
+
+                    // WATCH FACE APERTURES & COMPLICATIONS (Precision Horological Positioning)
+                    // 1. TOP APERTURE: Artisan Signature (Jisu ❤ Jenu)
+                    React.createElement('div', {
+                      className: 'absolute top-[17%] sm:top-[19%] left-1/2 -translate-x-1/2 flex items-baseline justify-center gap-1.5 sm:gap-2 z-10 pointer-events-none select-none whitespace-nowrap'
+                    },
+                      React.createElement('span', { 
+                        className: 'font-signature text-2xl sm:text-3xl md:text-[2.2rem] text-white/95 leading-none drop-shadow-[0_2px_12px_rgba(244,114,182,0.6)] tracking-wide',
+                        style: {
+                          textShadow: `0 0 16px ${currentTheme.accent}80, 0 2px 4px rgba(0,0,0,0.9)`
+                        }
+                      }, 'Jisu'),
+                      React.createElement('span', { 
+                        className: 'animate-heartbeat text-sm sm:text-base md:text-lg drop-shadow-[0_0_12px_rgba(244,114,182,0.9)] mx-1 self-center',
+                        style: { color: currentTheme.accent }
+                      }, '❤'),
+                      React.createElement('span', { 
+                        className: 'font-signature text-2xl sm:text-3xl md:text-[2.2rem] text-white/95 leading-none drop-shadow-[0_2px_12px_rgba(244,114,182,0.6)] tracking-wide',
+                        style: {
+                          textShadow: `0 0 16px ${currentTheme.accent}80, 0 2px 4px rgba(0,0,0,0.9)`
+                        }
+                      }, 'Jenu')
+                    ),
+
+                    // 2. CENTER COMPLICATION: The Years Hero Number (Above Center Pinion)
+                    React.createElement('div', {
+                      className: 'absolute top-[31%] sm:top-[33%] left-1/2 -translate-x-1/2 flex items-center justify-center z-10 pointer-events-none select-none whitespace-nowrap'
+                    },
+                      // Soft floating backlight aura
+                      React.createElement('div', {
+                        className: 'absolute inset-0 -m-6 rounded-full blur-[30px] opacity-35 pointer-events-none transition-all duration-700',
+                        style: { background: `radial-gradient(circle, ${currentTheme.accent}40 0%, transparent 70%)` }
+                      }),
+                      React.createElement('div', { className: 'relative flex items-center justify-center' },
+                        // Sculpted 3D Metallic Hero Numeral
+                        React.createElement('span', {
+                          className: 'text-5xl sm:text-7xl md:text-[5.5rem] lg:text-[6rem] font-clock-num font-black leading-none tracking-tight inline-block',
+                          style: {
+                            color: '#ffffff',
+                            textShadow: `0 0 30px ${currentTheme.accent}45, 0 8px 24px rgba(0,0,0,0.95)`
+                          }
+                        }, timeDiff.years),
+                        // Gilded Years Title & Hairline Accent
+                        React.createElement('div', { className: 'flex flex-col items-start ml-2 sm:ml-3' },
+                          React.createElement('span', {
+                            className: 'font-clock-roman font-bold text-xs sm:text-base md:text-lg uppercase tracking-[0.25em]',
+                            style: {
+                              color: currentTheme.accent,
+                              textShadow: `0 0 14px ${currentTheme.accent}80, 0 1px 3px rgba(0,0,0,0.8)`
+                            }
+                          }, 'YEARS'),
+                          React.createElement('div', {
+                            className: 'w-6 sm:w-9 h-[1.5px] my-0.5 sm:my-1 rounded-full',
+                            style: { background: `linear-gradient(90deg, ${currentTheme.accent}, transparent)` }
+                          }),
+                          React.createElement('span', {
+                            className: 'text-[6px] sm:text-[8px] text-white/50 uppercase tracking-[0.25em] font-clock-sub font-semibold'
+                          }, 'TOGETHER')
+                        )
+                      )
+                    ),
+
+                    // 3. BOTTOM COMPLICATION: Months & Days (Compact Register Framed Between VII and V)
+                    React.createElement('div', {
+                      className: 'absolute top-[67%] sm:top-[69%] left-1/2 -translate-x-1/2 w-[140px] sm:w-[170px] md:w-[190px] flex flex-col items-center z-10 pointer-events-none select-none'
+                    },
+                      // Hairline divider with glowing central jewel
+                      React.createElement('div', { className: 'relative w-full flex items-center justify-center mb-1.5 sm:mb-2.5' },
+                        React.createElement('div', { className: 'w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent' }),
+                        React.createElement('div', {
+                          className: 'absolute w-1.5 h-1.5 rounded-full',
+                          style: { backgroundColor: currentTheme.accent, boxShadow: `0 0 8px ${currentTheme.accent}` }
+                        })
+                      ),
+                      // 2 Precision Columns
+                      React.createElement('div', { className: 'flex items-center justify-around w-full' },
+                        [
+                          { label: 'MONTHS', val: timeDiff.months },
+                          { label: 'DAYS', val: timeDiff.days }
+                        ].map((item, idx) => 
+                          React.createElement(React.Fragment, { key: item.label },
+                            idx > 0 && React.createElement('div', {
+                              className: 'w-[1px] h-6 sm:h-7 bg-gradient-to-b from-transparent via-white/20 to-transparent'
+                            }),
+                            React.createElement('div', { className: 'flex-1 flex flex-col items-center justify-center' },
+                              React.createElement('span', {
+                                className: 'text-xl sm:text-2xl md:text-3xl font-clock-num font-bold leading-none tracking-tight',
+                                style: {
+                                  color: '#ffffff',
+                                  textShadow: '0 4px 12px rgba(0,0,0,0.85)'
+                                }
+                              }, String(item.val).padStart(2, '0')),
+                              React.createElement('span', {
+                                className: 'text-[6px] sm:text-[8px] font-clock-sub font-semibold tracking-[0.25em] uppercase mt-1 transition-colors duration-500',
+                                style: {
+                                  color: currentTheme.accentLight,
+                                  textShadow: `0 0 8px ${currentTheme.accent}50`
+                                }
+                              }, item.label)
+                            )
+                          )
+                        )
+                      )
+                    ),
+
+                    // WATCH HANDS (PRECISION TIMEPIECE GEARS)
+                    // Hour Hand - Faceted Dauphine Skeleton
+                    React.createElement('div', {
+                      ref: hourHandRef,
+                      className: 'absolute top-1/2 left-1/2 w-[8px] sm:w-[12px] h-[24%] rounded-sm origin-bottom -translate-x-1/2 -translate-y-full will-change-transform z-20 pointer-events-none drop-shadow-[0_8px_16px_rgba(0,0,0,0.8)]'
+                    },
+                      // 3D Split bevel hand (left light, right shadow)
+                      React.createElement('div', { className: 'relative w-full h-full flex' },
+                        React.createElement('div', { className: 'w-1/2 h-full bg-gradient-to-r from-gray-200 to-white rounded-l-sm' }),
+                        React.createElement('div', { className: 'w-1/2 h-full bg-gradient-to-r from-gray-400 to-gray-600 rounded-r-sm' }),
+                        // Luminescent inlay slot
+                        React.createElement('div', {
+                          className: 'absolute top-2 left-1/2 -translate-x-1/2 w-[2px] sm:w-[3px] h-[60%] rounded-full bg-white shadow-[0_0_6px_rgba(255,255,255,0.8)]'
+                        })
+                      )
+                    ),
+
+                    // Minute Hand - Extended Lancet Hand
+                    React.createElement('div', {
+                      ref: minuteHandRef,
+                      className: 'absolute top-1/2 left-1/2 w-[6px] sm:w-[9px] h-[36%] rounded-sm origin-bottom -translate-x-1/2 -translate-y-full will-change-transform z-20 pointer-events-none drop-shadow-[0_10px_20px_rgba(0,0,0,0.85)]'
+                    },
+                      React.createElement('div', { className: 'relative w-full h-full flex' },
+                        React.createElement('div', { className: 'w-1/2 h-full bg-gradient-to-r from-gray-100 to-white rounded-l-sm' }),
+                        React.createElement('div', { className: 'w-1/2 h-full bg-gradient-to-r from-gray-400 to-gray-500 rounded-r-sm' }),
+                        React.createElement('div', {
+                          className: 'absolute top-2 left-1/2 -translate-x-1/2 w-[2px] h-[70%] rounded-full bg-white/90 shadow-[0_0_8px_rgba(255,255,255,0.8)]'
+                        })
+                      )
+                    ),
+
+                    // Second Hand - Ultra-Slim Needle with Ruby / Rose Gold Counterbalance
+                    React.createElement('div', {
+                      ref: secondHandRef,
+                      className: 'absolute top-1/2 left-1/2 w-[1.5px] sm:w-[2px] h-[44%] origin-bottom -translate-x-1/2 -translate-y-full will-change-transform z-30 pointer-events-none'
+                    },
+                      // Upper needle
+                      React.createElement('div', {
+                        className: 'w-full h-full rounded-full',
+                        style: {
+                          backgroundColor: currentTheme.accent,
+                          boxShadow: `0 0 14px ${currentTheme.accent}`
+                        }
+                      }),
+                      // Arrow / Diamond Tip
+                      React.createElement('div', {
+                        className: 'absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full border',
+                        style: { borderColor: currentTheme.accent, backgroundColor: '#ffffff' }
+                      }),
+                      // Counterweight Tail below center
+                      React.createElement('div', {
+                        className: 'absolute -bottom-[18px] sm:-bottom-[26px] left-1/2 -translate-x-1/2 w-[1.5px] sm:w-[2px] h-[18px] sm:h-[26px] rounded-full',
+                        style: { backgroundColor: currentTheme.accent }
+                      })
+                    ),
+
+                    // Central Pinion & Corundum Jewel Bearing Cap
+                    React.createElement('div', {
+                      className: 'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 sm:w-5 sm:h-5 rounded-full bg-gradient-to-br from-gray-200 via-gray-400 to-gray-800 shadow-[0_2px_8px_rgba(0,0,0,0.9)] border border-white/50 flex items-center justify-center z-40 pointer-events-none'
+                    },
+                      // Synthetic Ruby Jewel Bearing in Center
+                      React.createElement('div', {
+                        className: 'w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-gradient-to-tr from-rose-900 via-rose-500 to-pink-300 shadow-[inset_0_1px_2px_rgba(0,0,0,0.6)]'
+                      })
+                    )
+                  )
+                )
+              )
+            ),
+
+            // Watch Crown on the right side
+            React.createElement('div', {
+              className: 'absolute right-[-4px] sm:right-[-6px] top-1/2 -translate-y-1/2 w-[14px] sm:w-[18px] md:w-[22px] h-[34px] sm:h-[44px] md:h-[50px] rounded-r-md bg-gradient-to-r from-gray-700 via-gray-300 to-gray-500 shadow-xl border-l border-black/80 flex flex-col justify-around py-1 pointer-events-none'
+            },
+              // Crown Knurling Ridges
+              [...Array(6)].map((_, i) => React.createElement('div', { key: i, className: 'w-full h-[1.5px] bg-black/60' }))
             )
           );
         };
 
+
+
+        // MAIN ROOT APPLICATION
         const App = () => {
           const [timeDiff, setTimeDiff] = useState(null);
+          // Random luxury theme on each reload/visit - fixed for the session
+          const [themeKey] = useState(() => {
+            const keys = Object.keys(THEMES);
+            return keys[Math.floor(Math.random() * keys.length)];
+          });
 
-          const calculateTime = () => {
+          const currentTheme = THEMES[themeKey] || THEMES.rosegold;
+
+          // Unmute audio by default and resume on user interaction
+          useEffect(() => {
+            soundEngine.init();
+            soundEngine.muted = false;
+            const startAudio = () => {
+              soundEngine.init();
+              soundEngine.muted = false;
+            };
+            window.addEventListener('click', startAudio, { once: true });
+            window.addEventListener('touchstart', startAudio, { once: true });
+            window.addEventListener('keydown', startAudio, { once: true });
+            return () => {
+              window.removeEventListener('click', startAudio);
+              window.removeEventListener('touchstart', startAudio);
+              window.removeEventListener('keydown', startAudio);
+            };
+          }, []);
+
+          // High Precision Time Calculation
+          const calculateTime = useCallback(() => {
             const now = new Date();
             const diffMs = now.getTime() - START_DATE.getTime();
+
             const seconds = Math.floor((diffMs / 1000) % 60);
             const minutes = Math.floor((diffMs / (1000 * 60)) % 60);
             const hours = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
+
             let years = now.getFullYear() - START_DATE.getFullYear();
             let months = now.getMonth() - START_DATE.getMonth();
             let days = now.getDate() - START_DATE.getDate();
-            if (days < 0) { months--; const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0); days += prevMonth.getDate(); }
-            if (months < 0) { years--; months += 12; }
+
+            if (days < 0) {
+              months--;
+              const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+              days += prevMonth.getDate();
+            }
+
+            if (months < 0) {
+              years--;
+              months += 12;
+            }
+
             setTimeDiff({ years, months, days, hours, minutes, seconds });
-          };
+          }, []);
 
           useEffect(() => {
             calculateTime();
             const timer = setInterval(calculateTime, 1000);
             return () => clearInterval(timer);
-          }, []);
+          }, [calculateTime]);
 
-          return React.createElement('div', { className: 'min-h-screen w-full relative bg-[#020202] selection:bg-pink-500/30 overflow-x-hidden flex flex-col items-center justify-center' },
-            React.createElement(BackgroundEffects),
-            React.createElement('main', { className: 'relative z-10 w-full flex flex-col items-center px-4 py-8 max-w-5xl mx-auto space-y-12' },
-              React.createElement('header', { className: 'text-center animate-in fade-in slide-in-from-top-12 duration-1000' },
-                React.createElement('h1', { className: 'text-6xl md:text-8xl font-serif glow-text bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent leading-tight pb-4' }, 'Our Age')
-              ),
-              timeDiff && React.createElement('section', { className: 'w-full animate-in fade-in zoom-in-95 duration-1000 delay-300' },
-                React.createElement('div', { className: 'w-full max-w-6xl mx-auto flex flex-col items-center justify-center' },
-                  React.createElement(AnalogClock, { timeDiff: timeDiff }),
-                  React.createElement('div', { className: 'mt-8 md:mt-12 text-center max-w-sm px-4' },
-                    React.createElement('p', { className: 'text-white/40 font-light text-xs md:text-sm italic leading-relaxed tracking-wide' }, 
-                      "\"Every tick is a testament to the journey we've walked, side by side, heartbeat by heartbeat.\""
-                    )
-                  )
-                )
+          return React.createElement('div', {
+            className: 'min-h-screen w-full relative bg-[#030305] selection:bg-pink-500/30 overflow-x-hidden flex flex-col items-center justify-center py-6'
+          },
+            // Ambient Starry Cosmic Background
+            React.createElement(BackgroundEffects, { currentTheme }),
+
+            // WATCH PRESENTATION
+            React.createElement('main', { className: 'relative z-10 w-full flex flex-col items-center justify-center my-auto' },
+              timeDiff ? React.createElement(LuxuryWatch, {
+                timeDiff,
+                currentTheme
+              }) : React.createElement('div', { className: 'w-[320px] h-[320px] rounded-full border border-white/10 flex items-center justify-center' },
+                React.createElement('span', { className: 'text-xs font-clock-sub tracking-widest text-white/40' }, 'INITIALIZING HOROLOGY...')
               )
             )
           );
